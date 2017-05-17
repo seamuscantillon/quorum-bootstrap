@@ -36,9 +36,36 @@ else
 fi
 
 # install build deps
+# update apt-get repos
 echo $CYAN"Installing dependencies..."$RESET
 add-apt-repository ppa:ethereum/ethereum
 apt-get update
+# optional upgrade
+echo $YELLOW"If this is a new Ubuntu installation you might wish to upgrade all possible components."
+while true; do
+	echo -n $YELLOW"Upgrade? (Y/n):"
+	read answer
+	if [[ -z "$answer" ]]
+		then
+		echo $RED"Please answer Y or n (case sensitive)"
+		echo
+	else
+		if [[ $answer == "n" ]]
+			then
+			echo $RESET
+			break
+		fi
+		if [[ $answer == "Y" ]]
+			then
+			echo $YELLOW"Upgrading..."$RESET
+			apt-get upgrade
+			break
+		fi
+		echo $RED"Please answer Y or n (case sensitive)"
+		echo
+	fi
+done
+# install dependencies
 apt-get install -y build-essential unzip libdb-dev libsodium-dev zlib1g-dev libtinfo-dev solc sysvbanner wrk
 
 # install constellation
