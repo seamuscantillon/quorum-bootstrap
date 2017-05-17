@@ -43,7 +43,7 @@ apt-get update
 # optional upgrade
 echo $YELLOW"If this is a new Ubuntu installation you might wish to upgrade all possible components."
 while true; do
-	echo -n $YELLOW"Upgrade? (Y/n):"
+	echo -n $WHITE"Upgrade? (Y/n):"
 	read answer
 	if [[ -z "$answer" ]]
 		then
@@ -52,13 +52,13 @@ while true; do
 	else
 		if [[ $answer == "n" ]]
 			then
-			echo $RESET
+			echo $YELLOW"Not upgrading Ubuntu"$RESET
 			break
 		fi
 		if [[ $answer == "Y" ]]
 			then
-			echo $YELLOW"Upgrading..."$RESET
-			apt-get upgrade
+			echo $CYAN"Upgrading Ubuntu..."$RESET
+			apt-get upgrade -y
 			break
 		fi
 		echo $RED"Please answer Y or n (case sensitive)"
@@ -84,7 +84,7 @@ tar xfz $GOREL
 mv go /usr/local/go
 rm -f $GOREL
 PATH=$PATH:/usr/local/go/bin
-echo 'PATH=$PATH:/usr/local/go/bin' >> /home/ubuntu/.bashrc
+echo 'PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 
 # make/install quorum
 echo $CYAN"Make and install quorum..."$RESET
