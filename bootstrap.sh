@@ -68,6 +68,9 @@ done
 # install dependencies
 apt-get install -y build-essential unzip libdb-dev libsodium-dev zlib1g-dev libtinfo-dev solc sysvbanner wrk
 
+# push home directory as current on to stack
+pushd ~ >/dev/null
+
 # install constellation
 echo $CYAN"Installing constellation..."$RESET
 wget -q https://github.com/jpmorganchase/constellation/releases/download/v0.0.1-alpha/ubuntu1604.zip
@@ -96,11 +99,10 @@ cp build/bin/geth /usr/local/bin
 cp build/bin/bootnode /usr/local/bin
 popd >/dev/null
 
-# copy examples
-#cp -r /vagrant/examples /home/ubuntu/quorum-examples
-#chown -R ubuntu:ubuntu /home/ubuntu/quorum /home/ubuntu/quorum-examples
+# pop back to where this script started
+popd >/dev/null
 
 # done!
 banner "Quorum"
 echo
-echo $GREEN"Set up of Quorum complete"
+echo $GREEN"Set up of Quorum complete"$RESET
