@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # by Simon Kenny
-# bootstrap.sh - ties together all scripts to run complete set up of Quorum blockchain
-
 
 # pre-setup script
 # colouring
@@ -24,10 +22,13 @@ echo $RESET
 	exit
 fi
 
-echo $GREEN"bootstrap Quorum blockchain set up"
+# install build deps
+echo $CYAN"Installing tools..."$RESET
+apt-get update
+apt-get install -y nodejs-legacy npm
+npm install web3
+npm install q
 
-echo $MAGENTA"Install Quorum..."
-./install-quorum.sh
-echo $MAGENTA"Prepare tools for node config..."
-./prepare-node-gen-tools.sh
-
+echo
+echo $GREEN"Preparation done for nodes set up"$RESET
+echo $WHITE"Run "$CYAN"node gen-keys-and-config.js"$WHITE" to continue process"$RESET
